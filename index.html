@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>نظام ابن الهيثم لإدارة شؤون الطلاب - جامعة المنوفية</title>
-  <!-- مكتبة Tailwind CSS للتنسيق المباشر -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- خطوط النظام -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -59,7 +57,7 @@
         </div>
 
         <!-- زر الرجوع لتسجيل الدخول -->
-        <div class="cursor-pointer text-slate-300 hover:text-white" onclick="showLoginPage()">
+        <div class="cursor-pointer text-slate-300 hover:text-white" onclick="showLoginPage()" title="تسجيل الخروج">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
         </div>
       </div>
@@ -77,15 +75,16 @@
           Menofia University
         </h1>
 
-        <!-- نموذج تسجيل الدخول -->
-        <form onsubmit="handleLogin(event)" class="w-full space-y-3.5">
+        <!-- نموذج تسجيل الدخول: الخانات فارغة تماماً عند الدخول -->
+        <form onsubmit="handleLogin(event)" class="w-full space-y-3.5" autocomplete="off">
           <div>
             <input 
               type="text" 
               id="inputUsername" 
-              value="30703281702098" 
+              value="" 
               placeholder="Username" 
               required
+              autocomplete="off"
               class="w-full h-11 px-4 text-center rounded-md bg-white/70 border border-slate-300 text-slate-800 placeholder-slate-500 font-sans focus:outline-none focus:ring-2 focus:ring-[#3794d0] focus:bg-white text-sm shadow-inner"
             />
           </div>
@@ -94,9 +93,10 @@
             <input 
               type="password" 
               id="inputPassword" 
-              value="254468300" 
+              value="" 
               placeholder="Password" 
               required
+              autocomplete="new-password"
               class="w-full h-11 px-4 text-center rounded-md bg-white/70 border border-slate-300 text-slate-800 placeholder-slate-500 font-sans focus:outline-none focus:ring-2 focus:ring-[#3794d0] focus:bg-white text-sm shadow-inner"
             />
           </div>
@@ -122,7 +122,7 @@
 
           <button 
             type="submit" 
-            class="w-full h-11 bg-[#3794d0] hover:bg-[#2b7bb0] active:scale-[0.99] text-white font-bold tracking-wider rounded-md text-sm transition-all shadow-md flex items-center justify-center font-sans mt-2"
+            class="w-full h-11 bg-[#3794d0] hover:bg-[#2b7bb0] active:scale-[0.99] text-white font-bold tracking-wider rounded-md text-sm transition-all shadow-md flex items-center justify-center font-sans mt-2 cursor-pointer"
           >
             LOG IN
           </button>
@@ -153,137 +153,118 @@
     <!-- ================= 3. شاشة النظام: الأيقونات على اليمين والبيانات على الشمال ================= -->
     <div id="portalScreen" class="flex-1 hidden flex flex-row overflow-hidden bg-[#e4edf4] text-slate-800 select-text">
 
-      <!-- ================= القائمة الجانبية والأيقونات (على اليمين) ================= -->
-      <aside class="w-[170px] sm:w-[195px] bg-[#dbe8f2] border-l border-[#c2d6e4] flex flex-col flex-shrink-0 shadow-sm overflow-y-auto">
+      <!-- ================= القائمة الجانبية والأيقونات (على اليمين) - مدمجة لـ w-[105px] sm:w-[115px] ================= -->
+      <aside class="w-[105px] sm:w-[115px] bg-[#dbe8f2] border-l border-[#c2d6e4] flex flex-col flex-shrink-0 shadow-sm overflow-y-auto select-none">
         
-        <div class="p-2 text-center border-b border-[#c8dae7]">
-          <h2 class="text-xs font-bold text-[#1a5b88]">جامعة المنوفية</h2>
-          <p class="text-[8px] text-[#4d728d] font-medium leading-tight">نظام ابن الهيثم لإدارة شئون الطلاب</p>
+        <div class="p-1 text-center border-b border-[#c8dae7]">
+          <h2 class="text-[10px] font-bold text-[#1a5b88]">جامعة المنوفية</h2>
+          <p class="text-[7.5px] text-[#4d728d] font-medium leading-tight">نظام ابن الهيثم</p>
         </div>
 
         <!-- كرت تعريف الطالب -->
-        <div class="p-1.5">
-          <div class="bg-white rounded p-1.5 shadow-2xs border border-[#cbdce8] text-center">
-            <div class="flex items-center gap-1.5">
-              <div class="w-8 h-8 rounded-full border border-[#5ca2ce] bg-slate-100 flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 fill-[#8aa2b3]" viewBox="0 0 40 40"><circle cx="20" cy="14" r="7"/><path d="M7 34 C7 25 13 22 20 22 C27 22 33 25 33 34 Z"/></svg>
+        <div class="p-1 border-b border-[#cbdce8]/80">
+          <div class="bg-white rounded p-1 shadow-2xs border border-[#cbdce8] text-center">
+            <div class="flex flex-col items-center gap-0.5">
+              <div class="w-7 h-7 rounded-full border border-[#5ca2ce] bg-slate-100 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 fill-[#8aa2b3]" viewBox="0 0 40 40"><circle cx="20" cy="14" r="7"/><path d="M7 34 C7 25 13 22 20 22 C27 22 33 25 33 34 Z"/></svg>
               </div>
-              <div class="flex-1 min-w-0 text-right">
-                <h3 class="text-[10px] font-bold text-[#1f3747] truncate leading-tight">عبدالله محمد حسن أحم...</h3>
-                <p class="text-[8px] text-[#4d6a7d] truncate leading-tight">البرنامج : قسم جيولوجيا البترول</p>
+              <div class="w-full text-center">
+                <h3 class="text-[8.5px] font-bold text-[#1f3747] truncate leading-tight">عبدالله محمد حسن</h3>
+                <p class="text-[7px] text-[#4d6a7d] truncate leading-tight">جيولوجيا البترول</p>
               </div>
             </div>
 
-            <div class="flex items-center justify-center gap-1 mt-1.5 pt-1 border-t border-slate-100">
-              <button onclick="alert('اللغة الحالية: العربية')" class="text-[7.5px] px-1 py-0.5 rounded bg-[#e3eff8] text-[#1b6294] hover:bg-[#d0e5f5]">تغير اللغه</button>
-              <button onclick="alert('لتغيير كلمة المرور يرجى مراجعة إدارة شؤون الطلاب')" class="text-[7.5px] px-1 py-0.5 rounded bg-[#e3eff8] text-[#1b6294] hover:bg-[#d0e5f5]">تغير كلمة المرور</button>
-              <button onclick="showLoginPage()" class="text-[7.5px] px-1 py-0.5 rounded bg-[#fae8e6] text-[#b83b32] font-semibold hover:bg-red-100">خروج</button>
+            <div class="flex items-center justify-center gap-1 mt-1 pt-1 border-t border-slate-100">
+              <button onclick="showLoginPage()" class="w-full text-[7.5px] py-0.5 rounded bg-[#fae8e6] text-[#b83b32] font-bold hover:bg-red-100">خروج</button>
             </div>
           </div>
         </div>
 
-        <!-- الأيقونات على اليمين والنص بجانبها (ترتيب مطابق تماماً) -->
-        <nav class="flex-1 px-1 py-1 space-y-0.5 text-[10px] font-medium text-[#264b63]">
+        <!-- الأيقونات على اليمين -->
+        <nav class="flex-1 px-1 py-1 space-y-0.5 text-[9px] font-medium text-[#264b63]">
           
-          <!-- 1. إميل الجامعه -->
-          <button onclick="switchView('email', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">✉️</span>
+          <button onclick="switchView('email', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">✉️</span>
             <span class="truncate">إميل الجامعه</span>
           </button>
 
-          <!-- 2. البيانات الاساسيه -->
-          <button onclick="switchView('basic', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">👤</span>
+          <button onclick="switchView('basic', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">👤</span>
             <span class="truncate">البيانات الاساسيه</span>
           </button>
 
-          <!-- 3. التسجيل الأكاديمي -->
-          <button onclick="switchView('academic_reg', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">📋</span>
+          <button onclick="switchView('academic_reg', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">📋</span>
             <span class="truncate">التسجيل الأكاديمي</span>
           </button>
 
-          <!-- 4. الجدول الدراسى -->
-          <button onclick="switchView('schedule', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">📅</span>
+          <button onclick="switchView('schedule', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">📅</span>
             <span class="truncate">الجدول الدراسى</span>
           </button>
 
-          <!-- 5. المصاريف الدراسيه -->
-          <button onclick="switchView('fees', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">💰</span>
+          <button onclick="switchView('fees', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">💰</span>
             <span class="truncate">المصاريف الدراسيه</span>
           </button>
 
-          <!-- 6. جدول الامتحانات -->
-          <button onclick="switchView('exams', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">📝</span>
+          <button onclick="switchView('exams', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">📝</span>
             <span class="truncate">جدول الامتحانات</span>
           </button>
 
-          <!-- 7. الاستبيان -->
-          <button onclick="switchView('survey', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">📑</span>
+          <button onclick="switchView('survey', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">📑</span>
             <span class="truncate">الاستبيان</span>
           </button>
 
-          <!-- 8. تقديرات المقررات (النتائج الدراسية) -->
-          <button onclick="switchView('grades', this)" class="nav-item active-nav w-full flex items-center gap-2 px-2 py-1.5 rounded bg-[#1b699e] text-white font-bold transition text-right shadow-2xs">
-            <span class="text-xs flex-shrink-0">📊</span>
+          <button onclick="switchView('grades', this)" class="nav-item active-nav w-full flex items-center gap-1 px-1.5 py-1 rounded bg-[#1b699e] text-white font-bold transition text-right shadow-2xs">
+            <span class="text-[11px] flex-shrink-0">📊</span>
             <span class="truncate">تقديرات المقررات</span>
           </button>
 
-          <!-- 9. رغبات الالتحاق -->
-          <button onclick="switchView('desires', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">🎯</span>
+          <button onclick="switchView('desires', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">🎯</span>
             <span class="truncate">رغبات الالتحاق</span>
           </button>
 
-          <!-- 10. نتيجة المقررات -->
-          <button onclick="switchView('results_sheet', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">📄</span>
+          <button onclick="switchView('results_sheet', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">📄</span>
             <span class="truncate">نتيجة المقررات</span>
           </button>
 
-          <!-- 11. استمارة التسجيل -->
-          <button onclick="switchView('reg_form', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">📋</span>
+          <button onclick="switchView('reg_form', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">📋</span>
             <span class="truncate">استمارة التسجيل</span>
           </button>
 
-          <!-- 12. الدفع الالكتروني -->
-          <button onclick="switchView('payment', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">💳</span>
+          <button onclick="switchView('payment', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">💳</span>
             <span class="truncate">الدفع الالكتروني</span>
           </button>
 
-          <!-- 13. الانذارات الأكاديميه -->
-          <button onclick="switchView('warnings', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">🔴</span>
-            <span class="truncate">الانذارات الأكاديميه</span>
+          <button onclick="switchView('warnings', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">🔴</span>
+            <span class="truncate">الانذارات</span>
           </button>
 
-          <!-- 14. انذار طالب غير مسجل -->
-          <button onclick="switchView('unreg_warning', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">🚫</span>
-            <span class="truncate">انذار طالب غير مسجل</span>
+          <button onclick="switchView('unreg_warning', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">🚫</span>
+            <span class="truncate">انذار غير مسجل</span>
           </button>
 
-          <!-- 15. تسجيل رغبات المقررات -->
-          <button onclick="switchView('course_desires', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">📚</span>
-            <span class="truncate">تسجيل رغبات المقررات</span>
+          <button onclick="switchView('course_desires', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">📚</span>
+            <span class="truncate">رغبات المقررات</span>
           </button>
 
-          <!-- 16. طباعة الوثائق -->
-          <button onclick="switchView('print_docs', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">📁</span>
+          <button onclick="switchView('print_docs', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">📁</span>
             <span class="truncate">طباعة الوثائق</span>
           </button>
 
-          <!-- 17. بطاقة الطالب -->
-          <button onclick="switchView('card', this)" class="nav-item w-full flex items-center gap-2 px-2 py-1.5 rounded hover:bg-[#c9dded] transition text-right">
-            <span class="text-xs flex-shrink-0">🪪</span>
+          <button onclick="switchView('card', this)" class="nav-item w-full flex items-center gap-1 px-1.5 py-1 rounded hover:bg-[#c9dded] transition text-right">
+            <span class="text-[11px] flex-shrink-0">🪪</span>
             <span class="truncate">بطاقة الطالب</span>
           </button>
 
@@ -291,17 +272,17 @@
       </aside>
 
       <!-- ================= منطقة عرض البيانات (على الشمال) ================= -->
-      <main class="flex-1 bg-white p-2.5 overflow-y-auto min-h-[550px] select-text">
+      <main class="flex-1 min-w-0 bg-white p-2 overflow-y-auto min-h-[550px] select-text">
 
-        <!-- ================= قسم تقديرات المقررات (ج ، ج ، ا) ================= -->
-        <div id="content-grades" class="content-panel space-y-3.5">
+        <!-- قسم النتائج وتقديرات المقررات -->
+        <div id="content-grades" class="content-panel space-y-2.5">
           <div class="flex flex-col items-center justify-center">
             <h1 class="text-sm sm:text-base font-bold text-[#1f6291] relative pb-0.5 border-b-2 border-[#1f6291]">
               النتائج الدراسية
             </h1>
           </div>
 
-          <div class="bg-[#246794] text-white px-2.5 py-1.5 rounded text-[10px] sm:text-xs font-medium flex flex-wrap items-center justify-between gap-1 shadow-2xs">
+          <div class="bg-[#246794] text-white px-2 py-1 rounded text-[9.5px] sm:text-[10.5px] font-medium flex flex-wrap items-center justify-between gap-1 shadow-2xs">
             <div><span>اسم الطالب : </span><span class="font-bold">عبدالله محمد حسن أحمد حموده</span></div>
             <div><span>المستوى : </span><span class="font-semibold">الأول</span></div>
             <div><span>حالة القيد : </span><span class="font-semibold">مستجد</span></div>
@@ -310,29 +291,29 @@
           <!-- الأول 2025-2026 -->
           <div class="space-y-1">
             <div class="flex justify-start">
-              <div class="bg-[#dcebf7] text-[#1b6294] font-bold text-[10px] px-3 py-0.5 rounded-l-full border-r-4 border-[#1b6294]">
+              <div class="bg-[#dcebf7] text-[#1b6294] font-bold text-[9.5px] px-2.5 py-0.5 rounded-l-full border-r-4 border-[#1b6294]">
                 الأول 2025-2026
               </div>
             </div>
-            <div class="h-2 bg-red-100/70 rounded-full w-full border border-red-200/50"></div>
+            <div class="h-1.5 bg-red-100/70 rounded-full w-full border border-red-200/50"></div>
           </div>
 
-          <!-- الثاني 2025-2026 -->
+          <!-- الثاني 2025-2026 (الجدول العلوي) -->
           <div class="space-y-1">
             <div class="flex justify-start">
-              <div class="bg-[#dcebf7] text-[#1b6294] font-bold text-[10px] px-3 py-0.5 rounded-l-full border-r-4 border-[#1b6294]">
+              <div class="bg-[#dcebf7] text-[#1b6294] font-bold text-[9.5px] px-2.5 py-0.5 rounded-l-full border-r-4 border-[#1b6294]">
                 الثاني 2025-2026
               </div>
             </div>
 
             <div class="overflow-x-auto border border-[#d8e6f1] rounded bg-white shadow-2xs">
-              <table class="w-full text-[9.5px] sm:text-[10.5px] text-center border-collapse">
+              <table class="w-full text-[8.5px] sm:text-[9.5px] text-center border-collapse">
                 <thead>
                   <tr class="bg-[#e6f1f8] text-[#185b88] border-b border-[#d8e6f1]">
                     <th class="py-1 px-1 font-bold border-l border-[#d8e6f1]">التقدير</th>
                     <th class="py-1 px-1 font-bold border-l border-[#d8e6f1]">الدرجه</th>
                     <th class="py-1 px-1 font-bold border-l border-[#d8e6f1]">الساعات</th>
-                    <th class="py-1 px-2 font-bold border-l border-[#d8e6f1] text-right pr-2">اسم المقرر</th>
+                    <th class="py-1 px-1.5 font-bold border-l border-[#d8e6f1] text-right pr-1.5">اسم المقرر</th>
                     <th class="py-1 px-1 font-bold">كود</th>
                   </tr>
                 </thead>
@@ -341,70 +322,70 @@
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-teal-700">P</td>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">91</td>
                     <td class="py-1 px-1 border-l border-slate-100">0</td>
-                    <td class="py-1 px-2 border-l border-slate-100 text-right pr-2">قضايا مجتمعية</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">قضايا مجتمعية</td>
                     <td class="py-1 px-1 font-mono">U 190</td>
                   </tr>
                   <tr>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold">د</td>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">182</td>
                     <td class="py-1 px-1 border-l border-slate-100">3</td>
-                    <td class="py-1 px-2 border-l border-slate-100 text-right pr-2">جيولوجيا طبيعية</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">جيولوجيا طبيعية</td>
                     <td class="py-1 px-1 font-mono">G141</td>
                   </tr>
                   <tr>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-red-600">ر</td>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">82</td>
                     <td class="py-1 px-1 border-l border-slate-100">3</td>
-                    <td class="py-1 px-2 border-l border-slate-100 text-right pr-2">علم البلورات</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">علم البلورات</td>
                     <td class="py-1 px-1 font-mono">G111</td>
                   </tr>
                   <tr>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-red-600">ر</td>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">122</td>
                     <td class="py-1 px-1 border-l border-slate-100">3</td>
-                    <td class="py-1 px-2 border-l border-slate-100 text-right pr-2">رياضة عامة(1)</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">رياضة عامة(1)</td>
                     <td class="py-1 px-1 font-mono">M119</td>
                   </tr>
                   <tr>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-red-600">ر</td>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">115</td>
                     <td class="py-1 px-1 border-l border-slate-100">3</td>
-                    <td class="py-1 px-2 border-l border-slate-100 text-right pr-2">تحليل رياضي (1)</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">تحليل رياضي (1)</td>
                     <td class="py-1 px-1 font-mono">M111</td>
                   </tr>
                   <tr>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold">ب</td>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">158</td>
                     <td class="py-1 px-1 border-l border-slate-100">2</td>
-                    <td class="py-1 px-2 border-l border-slate-100 text-right pr-2">دراسات بيئية</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">دراسات بيئية</td>
                     <td class="py-1 px-1 font-mono">F151</td>
                   </tr>
                   <tr>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold">+أ</td>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">188</td>
                     <td class="py-1 px-1 border-l border-slate-100">2</td>
-                    <td class="py-1 px-2 border-l border-slate-100 text-right pr-2">تاريخ العلم</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">تاريخ العلم</td>
                     <td class="py-1 px-1 font-mono">F110</td>
                   </tr>
                   <tr>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold">+ج</td>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">144</td>
                     <td class="py-1 px-1 border-l border-slate-100">0</td>
-                    <td class="py-1 px-2 border-l border-slate-100 text-right pr-2">حاسب آلي 1</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">حاسب آلي 1</td>
                     <td class="py-1 px-1 font-mono">U131</td>
                   </tr>
                   <tr>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-red-600">ر</td>
                     <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">35</td>
                     <td class="py-1 px-1 border-l border-slate-100">0</td>
-                    <td class="py-1 px-2 border-l border-slate-100 text-right pr-2">احصاء</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">احصاء</td>
                     <td class="py-1 px-1 font-mono">U133</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div class="bg-[#f0f6fa] border-y border-[#cde0ee] rounded px-2 py-1 text-[9px] sm:text-[10px] text-[#1e3d54] flex flex-wrap items-center justify-between gap-1 border-l-2 border-r-2 border-[#1f6291]">
+            <div class="bg-[#f0f6fa] border-y border-[#cde0ee] rounded px-2 py-1 text-[8px] sm:text-[9px] text-[#1e3d54] flex flex-wrap items-center justify-between gap-1 border-l-2 border-r-2 border-[#1f6291]">
               <div><span>المسجلة : </span><b class="text-[#1f6291]">16</b></div>
               <div><span>الحاصل عليها : </span><b class="text-[#1f6291]">7</b></div>
               <div><span>الفصلي : </span><b class="text-[#1f6291]">1.25</b></div>
@@ -412,52 +393,52 @@
             </div>
           </div>
 
-          <!-- الصيفي 2025-2026 (التقديرات المطلوبة: ج ، ج ، ا) -->
+          <!-- الصيفي 2025-2026 (الجدول السفلي - تم توحيد الخط تماماً ليكون مثل الجدول العلوي) -->
           <div class="space-y-1 pt-1">
             <div class="flex justify-start">
-              <div class="bg-[#dcebf7] text-[#1b6294] font-bold text-[10px] px-3 py-0.5 rounded-l-full border-r-4 border-[#1b6294]">
+              <div class="bg-[#dcebf7] text-[#1b6294] font-bold text-[9.5px] px-2.5 py-0.5 rounded-l-full border-r-4 border-[#1b6294]">
                 الصيفي 2025-2026
               </div>
             </div>
 
             <div class="overflow-x-auto border border-[#d8e6f1] rounded bg-white shadow-2xs">
-              <table class="w-full text-[9.5px] sm:text-[10.5px] text-center border-collapse">
+              <table class="w-full text-[8.5px] sm:text-[9.5px] text-center border-collapse">
                 <thead>
                   <tr class="bg-[#e6f1f8] text-[#185b88] border-b border-[#d8e6f1]">
                     <th class="py-1 px-1 font-bold border-l border-[#d8e6f1]">التقدير</th>
                     <th class="py-1 px-1 font-bold border-l border-[#d8e6f1]">الدرجه</th>
                     <th class="py-1 px-1 font-bold border-l border-[#d8e6f1]">الساعات</th>
-                    <th class="py-1 px-2 font-bold border-l border-[#d8e6f1] text-right pr-2">اسم المقرر</th>
+                    <th class="py-1 px-1.5 font-bold border-l border-[#d8e6f1] text-right pr-1.5">اسم المقرر</th>
                     <th class="py-1 px-1 font-bold">كود</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-slate-800">
                   <tr>
-                    <td class="py-1.5 px-1 border-l border-slate-100 font-black text-slate-900 text-xs">ج</td>
-                    <td class="py-1.5 px-1 border-l border-slate-100 font-bold text-[#842267]">142</td>
-                    <td class="py-1.5 px-1 border-l border-slate-100 font-semibold">3</td>
-                    <td class="py-1.5 px-2 border-l border-slate-100 text-right pr-2 font-semibold text-slate-900">علم البلورات</td>
-                    <td class="py-1.5 px-1 font-mono">G111</td>
+                    <td class="py-1 px-1 border-l border-slate-100 font-bold">ج</td>
+                    <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">142</td>
+                    <td class="py-1 px-1 border-l border-slate-100">3</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">علم البلورات</td>
+                    <td class="py-1 px-1 font-mono">G111</td>
                   </tr>
                   <tr>
-                    <td class="py-1.5 px-1 border-l border-slate-100 font-black text-slate-900 text-xs">ج</td>
-                    <td class="py-1.5 px-1 border-l border-slate-100 font-bold text-[#842267]">138</td>
-                    <td class="py-1.5 px-1 border-l border-slate-100 font-semibold">3</td>
-                    <td class="py-1.5 px-2 border-l border-slate-100 text-right pr-2 font-semibold text-slate-900">رياضة عامة(1)</td>
-                    <td class="py-1.5 px-1 font-mono">M119</td>
+                    <td class="py-1 px-1 border-l border-slate-100 font-bold">ج</td>
+                    <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">138</td>
+                    <td class="py-1 px-1 border-l border-slate-100">3</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">رياضة عامة(1)</td>
+                    <td class="py-1 px-1 font-mono">M119</td>
                   </tr>
                   <tr>
-                    <td class="py-1.5 px-1 border-l border-slate-100 font-black text-slate-900 text-xs">ا</td>
-                    <td class="py-1.5 px-1 border-l border-slate-100 font-bold text-[#842267]">88</td>
-                    <td class="py-1.5 px-1 border-l border-slate-100 font-semibold">0</td>
-                    <td class="py-1.5 px-2 border-l border-slate-100 text-right pr-2 font-semibold text-slate-900">احصاء</td>
-                    <td class="py-1.5 px-1 font-mono">U133</td>
+                    <td class="py-1 px-1 border-l border-slate-100 font-bold">ا</td>
+                    <td class="py-1 px-1 border-l border-slate-100 font-bold text-[#842267]">88</td>
+                    <td class="py-1 px-1 border-l border-slate-100">0</td>
+                    <td class="py-1 px-1.5 border-l border-slate-100 text-right pr-1.5">احصاء</td>
+                    <td class="py-1 px-1 font-mono">U133</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div class="bg-[#f0f6fa] border-y border-[#cde0ee] rounded px-2 py-1 text-[9px] sm:text-[10px] text-[#1e3d54] flex flex-wrap items-center justify-between gap-1 border-l-2 border-r-2 border-[#1f6291]">
+            <div class="bg-[#f0f6fa] border-y border-[#cde0ee] rounded px-2 py-1 text-[8px] sm:text-[9px] text-[#1e3d54] flex flex-wrap items-center justify-between gap-1 border-l-2 border-r-2 border-[#1f6291]">
               <div><span>المسجلة : </span><b class="text-[#1f6291]">6</b></div>
               <div><span>الحاصل عليها : </span><b class="text-[#1f6291]">6</b></div>
               <div><span>الفصلي : </span><b class="text-[#1f6291]">2.40</b></div>
@@ -466,71 +447,27 @@
           </div>
         </div>
 
-        <!-- قسم البيانات الأساسية بطاقات ألوان رسمية -->
-        <div id="content-basic" class="content-panel space-y-3 hidden">
-          <!-- البيانات الشخصية -->
-          <div class="rounded overflow-hidden border border-[#23587c]/40 bg-white shadow-2xs text-[9.5px]">
+        <!-- باقي الأقسام والبيانات الأساسية وجداول الامتحانات والبطاقة -->
+        <div id="content-basic" class="content-panel space-y-2.5 hidden">
+          <div class="rounded overflow-hidden border border-[#23587c]/40 bg-white shadow-2xs text-[9px]">
             <div class="bg-[#1b5b88] text-white px-2 py-1 font-bold flex items-center gap-1">
               <span>📋</span><span>البيانات الشخصية</span>
             </div>
-            <div class="p-2 space-y-1.5 text-slate-700">
+            <div class="p-2 space-y-1 text-slate-700">
               <div class="flex justify-between border-b pb-0.5"><span>الاسم بالعربية:</span><span class="font-bold text-slate-900">عبدالله محمد حسن أحمد حموده</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>الاسم بالإنجليزية:</span><span class="text-slate-400">—</span></div>
               <div class="flex justify-between border-b pb-0.5"><span>الرقم الجامعي:</span><span class="font-bold font-mono">62501224</span></div>
               <div class="flex justify-between border-b pb-0.5"><span>النوع:</span><span>ذكر</span></div>
               <div class="flex justify-between border-b pb-0.5"><span>الجنسية:</span><span>مصر</span></div>
               <div class="flex justify-between border-b pb-0.5"><span>الديانة:</span><span>مسلم</span></div>
               <div class="flex justify-between border-b pb-0.5"><span>تاريخ الميلاد:</span><span class="font-mono">28/3/2007</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>محل الميلاد:</span><span>المنوفيه</span></div>
               <div class="flex justify-between border-b pb-0.5"><span>الرقم القومي:</span><span class="font-bold font-mono">30703281702098</span></div>
-            </div>
-          </div>
-
-          <!-- بيانات العائلة -->
-          <div class="rounded overflow-hidden border border-[#488756]/40 bg-white shadow-2xs text-[9.5px]">
-            <div class="bg-[#488756] text-white px-2 py-1 font-bold flex items-center gap-1">
-              <span>👨‍👩‍👧‍👦</span><span>بيانات العائلة</span>
-            </div>
-            <div class="p-2 space-y-1.5 text-slate-700">
-              <div class="flex justify-between border-b pb-0.5"><span>اسم ولى الأمر:</span><span class="text-slate-400">—</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>الوظيفة:</span><span class="text-slate-400">—</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>المدينة:</span><span class="text-slate-400">—</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>تليفون المنزل:</span><span class="text-slate-400">—</span></div>
-            </div>
-          </div>
-
-          <!-- بيانات الاتصال -->
-          <div class="rounded overflow-hidden border border-[#607274]/40 bg-white shadow-2xs text-[9.5px]">
-            <div class="bg-[#607274] text-white px-2 py-1 font-bold flex items-center gap-1">
-              <span>📞</span><span>بيانات الاتصال</span>
-            </div>
-            <div class="p-2 space-y-1.5 text-slate-700">
-              <div class="flex justify-between border-b pb-0.5"><span>العنوان:</span><span>منشاة دملو / قويسنا / منوفية</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>المدينة:</span><span>المنوفيه</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>الموبايل:</span><span class="font-mono">01126511633</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>صندوق البريد:</span><span>بريد النظام: </span></div>
-            </div>
-          </div>
-
-          <!-- بيانات المؤهل السابق -->
-          <div class="rounded overflow-hidden border border-[#de7e29]/40 bg-white shadow-2xs text-[9.5px]">
-            <div class="bg-[#de7e29] text-white px-2 py-1 font-bold flex items-center gap-1">
-              <span>🎓</span><span>بيانات المؤهل السابق</span>
-            </div>
-            <div class="p-2 space-y-1.5 text-slate-700">
-              <div class="flex justify-between border-b pb-0.5"><span>المؤهل:</span><span>ثانوى عام رياضة جديد</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>سنة التخرج:</span><span class="font-mono">2024-2025</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>المدرسة:</span><span>الشهيد محمد صبرى احمد عطية الثانوية بميت برة</span></div>
-              <div class="flex justify-between border-b pb-0.5"><span>مجموع الدرجات:</span><span class="font-bold font-mono">256.0</span></div>
             </div>
           </div>
         </div>
 
-        <!-- الجداول والمصاريف وباقي الشاشات -->
-        <div id="content-schedule" class="content-panel space-y-2 hidden text-[10px]">
+        <div id="content-schedule" class="content-panel space-y-2 hidden text-[9.5px]">
           <div class="flex items-center justify-between border-b pb-1">
             <h2 class="font-bold text-[#1f6291]">الجدول الدراسي</h2>
-            <button onclick="window.print()" class="text-xs text-[#1f6291]">🖨️ طباعة</button>
           </div>
           <table class="w-full text-center border">
             <tr class="bg-[#1f658f] text-white font-bold">
@@ -555,7 +492,7 @@
           </div>
         </div>
 
-        <div id="content-exams" class="content-panel space-y-2 hidden text-[10px]">
+        <div id="content-exams" class="content-panel space-y-2 hidden text-[9.5px]">
           <div class="bg-[#1f658f] text-white p-1.5 rounded-t font-bold flex justify-between">
             <span>جدول الامتحانات</span><span>الصيفي 2025-2026</span>
           </div>
@@ -570,18 +507,18 @@
         </div>
 
         <div id="content-card" class="content-panel flex flex-col items-center justify-center p-2 hidden">
-          <div class="w-64 bg-white border-2 border-slate-400 rounded-xl shadow p-3 text-center">
+          <div class="w-60 bg-white border-2 border-slate-400 rounded-xl shadow p-3 text-center">
             <div class="flex justify-between items-center border-b-2 border-black pb-1 mb-1.5">
               <span class="text-[10px] font-bold text-slate-500">جامعة المنوفية</span>
               <h4 class="text-xs font-black">كلية العلوم</h4>
             </div>
-            <div class="w-16 h-20 mx-auto border rounded bg-slate-100 flex items-center justify-center mb-1">
-              <svg class="w-10 h-10 fill-slate-400" viewBox="0 0 40 40"><circle cx="20" cy="14" r="7"/><path d="M7 34 C7 25 13 22 20 22 C27 22 33 25 33 34 Z"/></svg>
+            <div class="w-14 h-18 mx-auto border rounded bg-slate-100 flex items-center justify-center mb-1">
+              <svg class="w-9 h-9 fill-slate-400" viewBox="0 0 40 40"><circle cx="20" cy="14" r="7"/><path d="M7 34 C7 25 13 22 20 22 C27 22 33 25 33 34 Z"/></svg>
             </div>
-            <h5 class="text-[11px] font-black text-slate-900">عبدالله محمد حسن أحمد حموده</h5>
-            <p class="text-[9px] font-bold text-slate-700">قسم جيولوجيا البترول</p>
-            <p class="text-[9px] text-slate-600 mt-0.5">الرقم القومي: <b class="font-mono">30703281702098</b></p>
-            <p class="text-[10px] font-bold text-slate-900 mt-0.5">2025-2026</p>
+            <h5 class="text-[10px] font-black text-slate-900">عبدالله محمد حسن أحمد حموده</h5>
+            <p class="text-[8.5px] font-bold text-slate-700">قسم جيولوجيا البترول</p>
+            <p class="text-[8.5px] text-slate-600 mt-0.5">الرقم القومي: <b class="font-mono">30703281702098</b></p>
+            <p class="text-[9.5px] font-bold text-slate-900 mt-0.5">2025-2026</p>
             <div class="w-full h-0.5 bg-black my-1.5"></div>
             <div class="text-[8px] font-mono tracking-widest text-center py-0.5 bg-slate-100">||| | |||| || ||||| | |||</div>
           </div>
@@ -605,18 +542,14 @@
 
   </div>
 
-  <!-- الأكواد البرمجية للتفاعل -->
   <script>
-    const VALID_USER = "30703281702098";
-    const VALID_PASS = "254468300";
-
     function handleLogin(e) {
       if (e) e.preventDefault();
       const user = document.getElementById("inputUsername").value.trim();
       const pass = document.getElementById("inputPassword").value.trim();
       const errorBox = document.getElementById("loginError");
 
-      if (user === VALID_USER && pass === VALID_PASS) {
+      if (user.length > 0 && pass.length > 0) {
         errorBox.classList.add("hidden");
         document.getElementById("loginScreen").classList.add("hidden");
         document.getElementById("portalScreen").classList.remove("hidden");
